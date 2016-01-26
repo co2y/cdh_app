@@ -1,4 +1,6 @@
 cloudera_manager:
+  ports: 
+    - 7180
   image: docker.iwanna.xyz:5000/cm:v2
   command: '/usr/sbin/sshd -D'
 master:
