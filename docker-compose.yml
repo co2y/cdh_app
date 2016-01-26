@@ -1,6 +1,6 @@
 cloudera_manager:
   image: docker.iwanna.xyz:5000/cm:v1
-  command: '/bin/bash -c "/usr/sbin/sshd -D"'
+  command: '/usr/sbin/sshd -D'
 master:
   image: docker.iwanna.xyz:5000/cdh:v1
   command: '/usr/sbin/sshd -D'
