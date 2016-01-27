@@ -4,11 +4,11 @@ cloudera_manager:
   image: docker.iwanna.xyz:5000/cm:v3
   command: '/usr/sbin/sshd -D'
 master:
-  image: docker.iwanna.xyz:5000/cdh:v3
+  image: docker.iwanna.xyz:5000/cdh:v4
   command: '/usr/sbin/sshd -D'
 slave1:
-  image: docker.iwanna.xyz:5000/cdh:v3
+  image: docker.iwanna.xyz:5000/cdh:v4
   command: '/usr/sbin/sshd -D'
 slave2:
-  image: docker.iwanna.xyz:5000/cdh:v3
+  image: docker.iwanna.xyz:5000/cdh:v4
   command: '/usr/sbin/sshd -D'
