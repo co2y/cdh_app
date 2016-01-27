@@ -2,13 +2,19 @@ cloudera_manager:
   ports: 
     - 7180
   image: docker.iwanna.xyz:5000/cm:v3
-  command: '/usr/sbin/sshd -D'
+  command: '/bin/bash -c "/etc/init.d/cloudera-scm-server-db start && /etc/init.d/cloudera-scm-server start && /usr/sbin/sshd -D"'
 master:
+  links:
+    - cloudera_manager
   image: docker.iwanna.xyz:5000/cdh:v4
-  command: '/bin/bash -c "sed -i \"s/^server_host=.*$/server_host={{cloudera_manager}}/g\" /etc/cloudera-scm-agent/config.ini && /usr/sbin/sshd -D"'
+  command: '/bin/bash -c "sed -i \"s/^server_host=.*$/server_host={{cloudera_manager}}/g\" /etc/cloudera-scm-agent/config.ini && /etc/init.d/cloudera-scm-agent start && /usr/sbin/sshd -D"'
 slave1:
+  links:
+    - cloudera_manager
   image: docker.iwanna.xyz:5000/cdh:v4
-  command: '/bin/bash -c "sed -i \"s/^server_host=.*$/server_host={{cloudera_manager}}/g\" /etc/cloudera-scm-agent/config.ini && /usr/sbin/sshd -D"'
+  command: '/bin/bash -c "sed -i \"s/^server_host=.*$/server_host={{cloudera_manager}}/g\" /etc/cloudera-scm-agent/config.ini && /etc/init.d/cloudera-scm-agent start && /usr/sbin/sshd -D"'
 slave2:
+  links:
+    - cloudera_manager
   image: docker.iwanna.xyz:5000/cdh:v4
-  command: '/bin/bash -c "sed -i \"s/^server_host=.*$/server_host={{cloudera_manager}}/g\" /etc/cloudera-scm-agent/config.ini && /usr/sbin/sshd -D"'
+  command: '/bin/bash -c "sed -i \"s/^server_host=.*$/server_host={{cloudera_manager}}/g\" /etc/cloudera-scm-agent/config.ini && /etc/init.d/cloudera-scm-agent start && /usr/sbin/sshd -D"'
